@@ -20,15 +20,14 @@ This application is designed to simplify your task management process, ensuring 
 ## Demo
 
 ### Add Task
-<img src="https://github.com/user-attachments/assets/f4072620-6b47-46ec-a3e4-d24db36266d8" alt="Add Task Screenshot" width="700" height="400">
+<img src="https://github.com/user-attachments/assets/f4072620-6b47-46ec-a3e4-d24db36266d8" alt="Add Task Screenshot" width="700" height="500">
 
 ### Delete Task
-<img src="https://github.com/user-attachments/assets/426f87d9-91f7-43b1-89e3-2ed8344decd8" alt="Delete Task Screenshot" width="700" height="400">
+<img src="https://github.com/user-attachments/assets/426f87d9-91f7-43b1-89e3-2ed8344decd8" alt="Delete Task Screenshot" width="700" height="500">
 
 ### Task Status
-<img src="https://github.com/user-attachments/assets/73413983-fdc4-4d6b-aed5-eab81a167bad" alt="Task Status Screenshot" width="700" height="400">
+<img src="https://github.com/user-attachments/assets/73413983-fdc4-4d6b-aed5-eab81a167bad" alt="Task Status Screenshot" width="700" height="500">
 
-> Replace the placeholder image links with the actual paths to your screenshots for accurate rendering.
 
 ---
 
