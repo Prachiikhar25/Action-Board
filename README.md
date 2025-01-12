@@ -1,2 +1,43 @@
-# Action-Board
-A structured outline of tasks and steps required to achieve specific goals, ideal for project-based activities.
+# Task Manager Application
+
+A simple and intuitive Task Manager application that allows users to:
+- **Add tasks**
+- **Delete tasks**
+- **Manage tasks efficiently** in a user-friendly interface.
+
+This application is designed to simplify your task management process, ensuring a seamless and enjoyable user experience.
+
+---
+
+## Features
+
+- **Add New Tasks**: Quickly add tasks to your to-do list with ease.
+- **Delete Tasks**: Remove completed or unnecessary tasks with a single click.
+- **User-Friendly Interface**: Designed with simplicity and accessibility in mind.
+
+---
+
+## Demo
+
+### Add Task
+![image](https://github.com/user-attachments/assets/f4072620-6b47-46ec-a3e4-d24db36266d8)
+
+### Delete Task
+![image](https://github.com/user-attachments/assets/426f87d9-91f7-43b1-89e3-2ed8344decd8)
+
+### Checking 
+![image](https://github.com/user-attachments/assets/73413983-fdc4-4d6b-aed5-eab81a167bad)
+
+
+
+
+
+> Replace `path/to/add-task-screenshot.png` and `path/to/delete-task-screenshot.png` with the actual paths to your screenshots.
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Prachiikhar25/Action-Board.git
