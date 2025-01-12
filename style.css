@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-app {
+    width: 60%;
+    max-width: 600px;
+    max-height: 540px;
+    background-color: white;
+    margin: 20px auto;
+    padding: 40px 30px 70px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.todo-app:hover {
+    transform: scale(1.05);
+}
+
+.todo-app h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.todo-app input[type="text"] {
+    width: calc(100% - 50px);
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-app button {
+    padding: 10px 20px;
+    background-color: #ff9a9e;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.todo-app button:hover {
+    background-color: #ff6f7d;
+    transform: scale(1.1);
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-list li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.todo-list li:hover {
+    background-color: #f9f9f9;
+}
+
+.todo-list li:last-child {
+    border-bottom: none;
+}
+
+.todo-list li .delete-btn {
+    background-color: #ff6f7d;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.todo-list li .delete-btn:hover {
+    background-color: #ff3b4f;
+    transform: scale(1.1);
+}

@@ -5,10 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO-DO-LIST-APP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checked {
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 
 <body>
-    adding files
+    <div class="container">
+        <div class="todo-app">
+            <h1>Action Board <img src="todo-icon.png" alt="list" style="width: 50px; height: 50px;"></h1>
+            <input type="text" id="new-task" placeholder="Add a new task...">
+            <button onclick="addTask()">Add Task</button>
+            <ul class="todo-list" id="task-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('new-task').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+
+        function addTask() {
+            const taskInput = document.getElementById('new-task');
+            const taskList = document.getElementById('task-list');
+
+            if (taskInput.value.trim() !== "") {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <img src="uncheck.png" alt="uncheck" style="width: 20px; height: 20px;" onclick="toggleCheck(this)">
+                    <span>${taskInput.value}</span>
+                    <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+                `;
+                taskList.appendChild(listItem);
+                taskInput.value = "";
+            }
+        }
+
+        function deleteTask(button) {
+            const listItem = button.parentElement;
+            listItem.remove();
+        }
+
+        function toggleCheck(img) {
+            const taskText = img.nextElementSibling;
+            if (img.src.includes("uncheck.png")) {
+                img.src = "check.png";
+                taskText.classList.add('checked');
+            } else {
+                img.src = "uncheck.png";
+                taskText.classList.remove('checked');
+            }
+        }
+    </script>
 </body>
 
 </html>
