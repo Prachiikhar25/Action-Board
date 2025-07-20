@@ -118,13 +118,13 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="btn-group w-100" role="group">
-                                    <button type="button" class="btn btn-outline-primary btn-sm active" onclick="filterTasks('all')">
+                                    <button type="button" class="btn btn-outline-primary btn-sm active" onclick="filterTasks('all', this)">
                                         <i class="fas fa-list me-1"></i>All
                                     </button>
-                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="filterTasks('completed')">
+                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="filterTasks('completed', this)">
                                         <i class="fas fa-check me-1"></i>Done
                                     </button>
-                                    <button type="button" class="btn btn-outline-warning btn-sm" onclick="filterTasks('pending')">
+                                    <button type="button" class="btn btn-outline-warning btn-sm" onclick="filterTasks('pending', this)">
                                         <i class="fas fa-clock me-1"></i>Pending
                                     </button>
                                 </div>
@@ -172,6 +172,9 @@
             loadTasks();
             updateStats();
             updateEmptyState();
+            // Set initial filter to 'all'
+            currentFilter = 'all';
+            renderTasks();
         });
 
         // Add task on Enter key press
@@ -305,14 +308,28 @@
             }
         }
 
-        function filterTasks(filter) {
+        function filterTasks(filter, element) {
             currentFilter = filter;
             
             // Update active button
             document.querySelectorAll('.btn-group .btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            
+            // If element is passed, use it; otherwise find the button by filter type
+            if (element) {
+                element.classList.add('active');
+            } else {
+                // Find the correct button based on filter
+                const buttons = document.querySelectorAll('.btn-group .btn');
+                buttons.forEach(btn => {
+                    if ((filter === 'all' && btn.textContent.includes('All')) ||
+                        (filter === 'completed' && btn.textContent.includes('Done')) ||
+                        (filter === 'pending' && btn.textContent.includes('Pending'))) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
             
             renderTasks();
         }
@@ -348,18 +365,28 @@
             const completed = tasks.filter(t => t.completed).length;
             const pending = total - completed;
             
-            document.getElementById('total-tasks').textContent = total;
-            document.getElementById('completed-tasks').textContent = completed;
-            document.getElementById('pending-tasks').textContent = pending;
-            document.getElementById('task-counter').textContent = `${total} task${total !== 1 ? 's' : ''}`;
+            // Update all stat elements
+            const totalElement = document.getElementById('total-tasks');
+            const completedElement = document.getElementById('completed-tasks');
+            const pendingElement = document.getElementById('pending-tasks');
+            const counterElement = document.getElementById('task-counter');
+            
+            if (totalElement) totalElement.textContent = total;
+            if (completedElement) completedElement.textContent = completed;
+            if (pendingElement) pendingElement.textContent = pending;
+            if (counterElement) counterElement.textContent = `${total} task${total !== 1 ? 's' : ''}`;
             
             // Show/hide clear all button
             const clearBtn = document.getElementById('clear-all-btn');
-            if (total > 0) {
-                clearBtn.style.display = 'block';
-            } else {
-                clearBtn.style.display = 'none';
+            if (clearBtn) {
+                if (total > 0) {
+                    clearBtn.style.display = 'block';
+                } else {
+                    clearBtn.style.display = 'none';
+                }
             }
+            
+            console.log('Stats updated:', { total, completed, pending }); // Debug log
         }
 
         function updateEmptyState() {
@@ -438,6 +465,8 @@
             if (savedTasks) {
                 tasks = JSON.parse(savedTasks);
                 renderTasks();
+                updateStats();
+                updateEmptyState();
             }
         }
 
