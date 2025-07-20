@@ -33,6 +33,9 @@
             </a>
             <div class="d-flex align-items-center">
                 <span class="badge bg-light text-dark me-3" id="task-counter">0 tasks</span>
+                <button class="btn btn-outline-light btn-sm me-2" onclick="forceUpdateStats()" title="Refresh Stats">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
                 <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#statsCollapse">
                     <i class="fas fa-chart-line"></i> Stats
                 </button>
@@ -169,12 +172,17 @@
 
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
-            loadTasks();
-            updateStats();
-            updateEmptyState();
-            // Set initial filter to 'all'
-            currentFilter = 'all';
-            renderTasks();
+            console.log('DOM loaded, initializing app...');
+            
+            // Wait a bit for all elements to be ready
+            setTimeout(() => {
+                loadTasks();
+                currentFilter = 'all';
+                renderTasks();
+                updateStats();
+                updateEmptyState();
+                console.log('App initialized');
+            }, 100);
         });
 
         // Add task on Enter key press
@@ -197,16 +205,23 @@
                 };
 
                 tasks.push(task);
+                console.log('Task added:', task);
+                console.log('Total tasks now:', tasks.length);
+                
                 renderTasks();
-                taskInput.value = "";
-                updateStats();
+                updateStats(); // Force stats update
                 saveTasks();
+                
+                taskInput.value = "";
                 
                 // Show success toast
                 showToast('Task added successfully!', 'success');
                 
                 // Auto-focus back to input
                 taskInput.focus();
+                
+                // Force another stats update after a small delay
+                setTimeout(() => updateStats(), 50);
             }
         }
 
@@ -263,6 +278,8 @@
             const task = tasks.find(t => t.id === id);
             if (task) {
                 task.completed = !task.completed;
+                console.log('Task toggled:', task);
+                
                 renderTasks();
                 updateStats();
                 saveTasks();
@@ -270,6 +287,9 @@
                 const message = task.completed ? 'Task completed! 🎉' : 'Task marked as pending';
                 const type = task.completed ? 'success' : 'info';
                 showToast(message, type);
+                
+                // Force stats update
+                setTimeout(() => updateStats(), 50);
             }
         }
 
@@ -365,28 +385,48 @@
             const completed = tasks.filter(t => t.completed).length;
             const pending = total - completed;
             
-            // Update all stat elements
-            const totalElement = document.getElementById('total-tasks');
-            const completedElement = document.getElementById('completed-tasks');
-            const pendingElement = document.getElementById('pending-tasks');
-            const counterElement = document.getElementById('task-counter');
+            console.log('Updating stats:', { total, completed, pending, tasksArray: tasks });
             
-            if (totalElement) totalElement.textContent = total;
-            if (completedElement) completedElement.textContent = completed;
-            if (pendingElement) pendingElement.textContent = pending;
-            if (counterElement) counterElement.textContent = `${total} task${total !== 1 ? 's' : ''}`;
-            
-            // Show/hide clear all button
-            const clearBtn = document.getElementById('clear-all-btn');
-            if (clearBtn) {
-                if (total > 0) {
-                    clearBtn.style.display = 'block';
-                } else {
-                    clearBtn.style.display = 'none';
+            // Force update all stat elements with retries
+            setTimeout(() => {
+                const totalElement = document.getElementById('total-tasks');
+                const completedElement = document.getElementById('completed-tasks');
+                const pendingElement = document.getElementById('pending-tasks');
+                const counterElement = document.getElementById('task-counter');
+                
+                console.log('Elements found:', {
+                    totalElement: !!totalElement,
+                    completedElement: !!completedElement,
+                    pendingElement: !!pendingElement,
+                    counterElement: !!counterElement
+                });
+                
+                if (totalElement) {
+                    totalElement.textContent = total;
+                    totalElement.innerHTML = total; // Force update
                 }
-            }
-            
-            console.log('Stats updated:', { total, completed, pending }); // Debug log
+                if (completedElement) {
+                    completedElement.textContent = completed;
+                    completedElement.innerHTML = completed; // Force update
+                }
+                if (pendingElement) {
+                    pendingElement.textContent = pending;
+                    pendingElement.innerHTML = pending; // Force update
+                }
+                if (counterElement) {
+                    const taskText = `${total} task${total !== 1 ? 's' : ''}`;
+                    counterElement.textContent = taskText;
+                    counterElement.innerHTML = taskText; // Force update
+                }
+                
+                // Show/hide clear all button
+                const clearBtn = document.getElementById('clear-all-btn');
+                if (clearBtn) {
+                    clearBtn.style.display = total > 0 ? 'block' : 'none';
+                }
+                
+                console.log('Stats updated successfully');
+            }, 10);
         }
 
         function updateEmptyState() {
@@ -468,6 +508,12 @@
                 updateStats();
                 updateEmptyState();
             }
+        }
+
+        function forceUpdateStats() {
+            console.log('Force updating stats...');
+            updateStats();
+            showToast('Stats refreshed!', 'info');
         }
 
         // Auto-save every 30 seconds
