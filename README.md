@@ -46,15 +46,17 @@ A modern, feature-rich task management application built with HTML, CSS, and Jav
 
 #### Add Task
 
-<img src="https://github.com/user-attachments/assets/f4072620-6b47-46ec-a3e4-d24db36266d8" alt="Add Task Screenshot" width="700" height="500">
+<img src="https://github.com/user-attachments/assets/055d2ccd-a566-415b-a97d-130d9db93b3f" alt="Add Task Screenshot" width="700" height="500">
+<img src="https://github.com/user-attachments/assets/a715e492-62fd-4be6-9a36-b6f959eb5bdb" alt="Add Task Screenshot" width="700" height="500">
 
 #### Delete Task
 
-<img src="https://github.com/user-attachments/assets/426f87d9-91f7-43b1-89e3-2ed8344decd8" alt="Delete Task Screenshot" width="700" height="500">
+<img src="https://github.com/user-attachments/assets/98fdaf31-8440-4511-9c90-b569376bc257" alt="Delete Task Screenshot" width="700" height="500">
+<img src="https://github.com/user-attachments/assets/92d3bff6-bb7d-4408-af74-fe64935d3aa6" alt="Delete Task Screenshot" width="700" height="500">
 
 #### Task Status
 
-<img src="https://github.com/user-attachments/assets/73413983-fdc4-4d6b-aed5-eab81a167bad" alt="Task Status Screenshot" width="700" height="500">
+<img src="https://github.com/user-attachments/assets/d8f22264-f86b-41ef-8998-6b13ec07661f" alt="Task Status Screenshot" width="700" height="500">
 
 ---
 
